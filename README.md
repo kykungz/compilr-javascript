@@ -16,6 +16,7 @@ docker exec -it compilr-javascript bash
 ```
 
 ### 2.) Clone and build new image (Configurable)
+
 ```bash
 # clone the repository
 git clone https://github.com/kykungz/compilr-javascript.git && cd compilr-javascript
