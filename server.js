@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8080
 const logger = new (winston.Logger)({
   transports: [
     new (winston.transports.Console)(),
-    new (winston.transports.File)({filename: 'logs.log'})
+    new (winston.transports.File)({filename: 'server-logs.log'})
   ]
 })
 const app = express()

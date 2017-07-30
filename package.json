@@ -1,5 +1,5 @@
 {
-  "name": "test-docker",
+  "name": "compilr-javascript",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
