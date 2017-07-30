@@ -1,5 +1,5 @@
 # compilr-javascript
-> Docker-based backend javascript compiler
+> Docker-based javascript compiler API server
 
 ## Installation
 - Required [Docker](https://www.docker.com/)
