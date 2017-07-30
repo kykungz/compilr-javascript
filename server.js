@@ -1,16 +1,15 @@
 'use strict';
 const ip = require('ip');
-const fs = require('mz/fs');
+const fs = require('fs-extra');
+const exec = require('child-process-promise').exec;
 const winston = require('winston');
-const rimraf = require('rimraf');
-const exec = require('mz/child_process').exec;
 const bodyParser = require('body-parser')
-
 const express = require('express');
-const app = express();
 
 // Constants
 const PORT = process.env.PORT || 8080;
+
+const app = express();
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -34,17 +33,17 @@ app.post('/compile/', async (req, res, next) => {
     console.log(`created file ${dirname}/test.js`)
 
     try {
-      result = await exec(`node ${dirname}/test.js`)
-      res.send(result)
+      let result = await exec(`node ${dirname}/test.js`)
+      res.send(result.stdout)
     } catch (err) {
-      res.send(err)
+      res.send(err.stdout + err.stderr)
     }
 
   } catch (e) {
     next(e)
   } finally {
-    await fs.rmdir(dirname)
-    console.log(`removed ${dirname}`);
+    await fs.remove(dirname)
+    console.log(`removed ${dirname}`);  
   }
 })
 
