@@ -13,20 +13,24 @@ After running the script above, you can now access your container using command:
 docker exec -it compilr-javascript bash
 ```
 ## Usage
-compilr-javascript will create a simple NodeJS API server on port 8080 by default. You can compile and run you code by sending a POST request to your https://localhost:8080/compile route, with a JSON request body similar to:
+compilr-javascript will create a simple API server on port 8080 by default. You can compile and run you code by sending a POST request to your https://localhost:8080/compile route, with a JSON request body similar to:
 ```javascript
 // { "content": <code> }
 { "content": "let x = 10; console.log('hello world!' + x);" }
 ```
 The response will be in JSON format with structure:
-```javscript
+```javascript
 // {
 //    "success": <boolean>,
 //    "output": <runnig_result>
 // }
 
+// if there is an error, success field will be false
+// and the error output will be shown
+
 {
     "success": true,
     "output": "hello world!10\n"
 }
+
 ```
