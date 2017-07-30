@@ -50,7 +50,7 @@ The response will be in JSON format with structure:
 }
 
 ```
-If there is an error, success field will be `false` and the error output will be shown.
+If there is a compile/run error, success field will be `false` and the error output will be shown.
 # Configuration
 `config.js`
 
