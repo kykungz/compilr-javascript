@@ -33,17 +33,23 @@ app.post('/compile/', async (req, res, next) => {
     console.log(`created file ${dirname}/test.js`)
 
     try {
-      let result = await exec(`node ${dirname}/test.js`)
-      res.send(result.stdout)
+      let result = await exec(`ulimit -t 3;node ${dirname}/test.js`)
+      res.send({
+        success: true,
+        output: result.stdout
+      })
     } catch (err) {
-      res.send(err.stdout + err.stderr)
+      res.send({
+        success: false,
+        output: err.stdout + err.stderr
+      })
     }
 
   } catch (e) {
     next(e)
   } finally {
     await fs.remove(dirname)
-    console.log(`removed ${dirname}`);  
+    console.log(`removed ${dirname}`);
   }
 })
 
