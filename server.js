@@ -10,7 +10,7 @@ const express = require('express')
 const config = require('./config')
 
 // Constants
-const PORT = config.port
+const PORT = config.PORT
 const logger = new (winston.Logger)({
   transports: [
     new (winston.transports.Console)(),
@@ -41,7 +41,7 @@ app.post('/compile/', async (req, res, next) => {
     logger.log('info', `created file ${dirname}/tmp.js`)
 
     try {
-      let result = await exec(`ulimit -t ${config.timeout};node ${dirname}/tmp.js`)
+      let result = await exec(`ulimit -t ${config.TIMEOUT};node ${dirname}/tmp.js`)
       res.send({
         success: true,
         output: result.stdout
