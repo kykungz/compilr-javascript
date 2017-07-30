@@ -6,7 +6,7 @@
 
 ```bash
 # download and run kykungz/compilr-javascript image in detached mode (port 8080)
-docker run -p 8080:8080 -d --name compilr-javascript kykungz/compilr-javascript
+docker run -p 8080:13570 -d --name compilr-javascript kykungz/compilr-javascript
 ```
 After running the script above, you can now access your container using command:
 ```

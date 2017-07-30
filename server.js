@@ -7,9 +7,10 @@ const exec = require('child-process-promise').exec
 const winston = require('winston')
 const bodyParser = require('body-parser')
 const express = require('express')
+const config = require('./config')
 
 // Constants
-const PORT = process.env.PORT || 8080
+const PORT = config.port
 const logger = new (winston.Logger)({
   transports: [
     new (winston.transports.Console)(),
@@ -36,11 +37,11 @@ app.post('/compile/', async (req, res, next) => {
     dirname = await fs.mkdtemp('./run/tmp_')
     logger.log('info', `created directory ${dirname}`)
 
-    await fs.writeFile(`${dirname}/test.js`, content)
-    logger.log('info', `created file ${dirname}/test.js`)
+    await fs.writeFile(`${dirname}/tmp.js`, content)
+    logger.log('info', `created file ${dirname}/tmp.js`)
 
     try {
-      let result = await exec(`ulimit -t 3;node ${dirname}/test.js`)
+      let result = await exec(`ulimit -t ${config.timeout};node ${dirname}/tmp.js`)
       res.send({
         success: true,
         output: result.stdout

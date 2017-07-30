@@ -8,6 +8,6 @@ COPY package.json package-lock.json server.js ./
 
 RUN npm install
 
-EXPOSE 8080
+EXPOSE 13570
 
 CMD [ "npm", "start" ]
