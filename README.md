@@ -28,7 +28,13 @@ With this installation, you can configure the environment by editing `config.js`
 below.
 
 After running the script above, you can now access your container using command:
-```
+```bash
+# open current tty
+docker attach compilr-javascript
+
+# OR
+
+# open new tty
 docker exec -it compilr-javascript bash
 ```
 ## Usage
