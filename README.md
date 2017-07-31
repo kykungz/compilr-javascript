@@ -27,6 +27,7 @@ docker run -p 8080:13570 -d --name compilr-javascript kykungz/compilr-javascript
 With this installation, you can configure the environment by editing `config.js` file before building an image. See [Configuration](#configuration)
 below.
 
+---
 After running the script above, you can now access your container using command:
 ```bash
 # open current tty
