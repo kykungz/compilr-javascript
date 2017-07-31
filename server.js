@@ -23,10 +23,11 @@ app.use(bodyParser.json())        // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({   // to support URL-encoded bodies
   extended: true
 }))
+app.use(express.static('./dist'))
 
 // root
 app.get('/', (req, res) => {
-  res.send('api ready')
+  res.sendFile('./dist/index.html', {root: __dirname})
 })
 
 app.post('/compile/', async (req, res, next) => {

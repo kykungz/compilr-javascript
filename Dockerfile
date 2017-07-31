@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package.json package-lock.json config.js server.js ./
+COPY dist ./dist/
 
 RUN npm install
 
