@@ -4,7 +4,7 @@ FROM node:latest
 WORKDIR /usr/src/app
 
 # Install app dependencies
-COPY package.json package-lock.json config.js server.js ./
+COPY package.json package-lock.json config.js compilr.js server.js ./
 COPY dist ./dist/
 
 RUN npm install
