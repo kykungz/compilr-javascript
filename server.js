@@ -3,11 +3,11 @@
 // require modules
 const ip = require('ip')
 const fs = require('fs-extra')
-const exec = require('child-process-promise').exec
 const winston = require('winston')
 const bodyParser = require('body-parser')
 const express = require('express')
 const config = require('./config')
+const compilr = require('./compilr')
 
 // Constants
 const PORT = config.PORT
@@ -41,18 +41,8 @@ app.post('/compile/', async (req, res, next) => {
     await fs.writeFile(`${dirname}/tmp.js`, content)
     logger.log('info', `created file ${dirname}/tmp.js`)
 
-    try {
-      const result = await exec(`ulimit -t ${config.TIMEOUT};node ${dirname}/tmp.js`)
-      res.send({
-        success: true,
-        output: result.stdout
-      })
-    } catch (err) {
-      res.send({
-        success: false,
-        output: err.stdout + err.stderr
-      })
-    }
+    const result = await compilr.compile(dirname)
+    res.send(result)
   } catch (e) {
     next(e)
   } finally {
