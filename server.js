@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/compile/', async (req, res, next) => {
-  let content = req.body.content
+  const content = req.body.content
   let dirname
 
   try {
@@ -42,7 +42,7 @@ app.post('/compile/', async (req, res, next) => {
     logger.log('info', `created file ${dirname}/tmp.js`)
 
     try {
-      let result = await exec(`ulimit -t ${config.TIMEOUT};node ${dirname}/tmp.js`)
+      const result = await exec(`ulimit -t ${config.TIMEOUT};node ${dirname}/tmp.js`)
       res.send({
         success: true,
         output: result.stdout
