@@ -8,7 +8,7 @@
 
 ```bash
 # download and run kykungz/compilr-javascript image in detached mode (port 8080)
-docker run -p 8080:13570 -d --name compilr-javascript kykungz/compilr-javascript
+docker run -it -p 8080:8080 --name compilr-javascript kykungz/compilr-javascript
 ```
 
 ### 2.) Clone and build new image (Configurable)
@@ -22,7 +22,7 @@ git clone https://github.com/kykungz/compilr-javascript.git && cd compilr-javasc
 # build an image
 docker build -t kykungz/compilr-javascript .
 # run kykungz/compilr-javascript image in detached mode (port 8080)
-docker run -p 8080:13570 -d --name compilr-javascript kykungz/compilr-javascript
+docker run -it -p 8080:8080 --name compilr-javascript kykungz/compilr-javascript
 ```
 With this installation, you can configure the environment by editing `config.js` file before building an image. See [Configuration](#configuration)
 below.
