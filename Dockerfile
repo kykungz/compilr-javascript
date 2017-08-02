@@ -9,6 +9,6 @@ COPY dist ./dist/
 
 RUN npm install
 
-EXPOSE 13570
+EXPOSE 8080
 
 CMD [ "npm", "start" ]
