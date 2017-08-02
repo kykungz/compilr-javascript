@@ -7,7 +7,7 @@
 ### 1.) Download directly from Docker Hub
 
 ```bash
-# download and run kykungz/compilr-javascript image in detached mode (port 8080)
+# download and run kykungz/compilr-javascript (port 8080)
 docker run -it -p 8080:8080 --name compilr-javascript kykungz/compilr-javascript
 ```
 

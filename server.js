@@ -11,13 +11,18 @@ const compilr = require('./compilr')
 
 // Constants
 const PORT = config.PORT
-const logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)(),
-    new (winston.transports.File)({filename: 'server-logs.log'})
-  ]
-})
 const app = express()
+
+if (config.LOG) {
+  winston.configure({
+    transports: [
+      new (winston.transports.Console)(),
+      new (winston.transports.File)({filename: 'server-logs.log'})
+    ]
+  })
+}
+
+compilr.init(winston)
 
 app.use(bodyParser.json())        // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({   // to support URL-encoded bodies
@@ -36,10 +41,10 @@ app.post('/compile/', async (req, res, next) => {
 
   try {
     dirname = await fs.mkdtemp('./run/tmp_')
-    logger.log('info', `created directory ${dirname}`)
+    winston.log('info', `created directory ${dirname}`)
 
     await fs.writeFile(`${dirname}/tmp.js`, content)
-    logger.log('info', `created file ${dirname}/tmp.js`)
+    winston.log('info', `created file ${dirname}/tmp.js`)
 
     const result = await compilr.compile(dirname)
     res.send(result)
@@ -47,13 +52,13 @@ app.post('/compile/', async (req, res, next) => {
     next(e)
   } finally {
     await fs.remove(dirname)
-    logger.log('info', `removed directory ${dirname}`)
+    winston.log('info', `removed directory ${dirname}`)
   }
 })
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
-  logger.log('error', err.message)
+  winston.log('error', err.message)
   res.status(500).render('error', {
     message: err.message,
     error: err

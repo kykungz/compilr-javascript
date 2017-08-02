@@ -17,8 +17,8 @@ compilr.init = (logger) => {
 compilr.compile = async (dirname) => {
   try {
     // compile and run
+    this.logger.log('info', `executed command: ulimit -t ${config.TIMEOUT};node ${dirname}/tmp.js`)
     const result = await exec(`ulimit -t ${config.TIMEOUT};node ${dirname}/tmp.js`)
-
     return {
       success: true,
       output: result.stdout
