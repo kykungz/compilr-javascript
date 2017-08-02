@@ -39,7 +39,7 @@ docker attach compilr-javascript
 docker exec -it compilr-javascript bash
 ```
 ## Usage
-compilr-javascript will create a simple API server on port 8080 by default. You can compile and run you code by sending a POST request to your https://localhost:8080/compile route, with a JSON request body similar to:
+compilr-javascript will create a simple API server on port 8080 by default. You can compile and run you code by sending a `POST` request to your https://localhost:8080/compile route, with a JSON request body similar to:
 ```javascript
 // { "content": <code> }
 
